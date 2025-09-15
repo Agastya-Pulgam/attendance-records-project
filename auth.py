@@ -1,12 +1,15 @@
-from db import get_cursor
+from db import get_connection
 from datetime import datetime
 import bcrypt
-connection,cur=get_cursor()
+
 def new_teacher_register(email,passwd,username):
 
    
 
     try:
+        connection=get_connection()
+        cur=connection.cursor(buffered=True)
+        
         connection.start_transaction()
         cur.execute('select user_id from teacher_login where full_name = %s or email = %s', (username, email))
 
@@ -34,6 +37,9 @@ def new_teacher_register(email,passwd,username):
 def teacher_login(username,email,password):
     
     try:
+        connection=get_connection()
+        cur=connection.cursor(buffered=True)
+
         connection.start_transaction()
         result=cur.execute('select login_password from teacher_login where email=%s and full_name=%s',(email,username))
 

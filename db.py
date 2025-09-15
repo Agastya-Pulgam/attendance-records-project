@@ -1,23 +1,32 @@
 import os
 import dotenv
-import mysql.connector as msc
+from mysql.connector import pooling
+
 
 dotenv.load_dotenv()
 
 db_user=os.getenv("DB_USER")
 db_pass=os.getenv("DB_PASS")
 db_name=os.getenv("DB_NAME")
-def get_cursor():
 
-    mydb=msc.connect(
-        host='localhost',
-        user=db_user,
-        passwd=db_pass,
-        db=db_name
-    )
-    mycursor=mydb.cursor(buffered=True)
+pool=pooling.get_MySQLConnectionPool(
     
-    print('connection successful' if mydb.is_connected() else 'failed to connect')
+    poolname='mypool',
+    pool_size=50,
+    host='localhost',
+    user=db_user,
+    passwd=db_pass,
+    db=db_name
+)
 
-    return mydb,mycursor
+def get_connection():
 
+    return pool.get_connection()
+
+try:
+    connection=get_connection()
+    if connection.is_connected():
+        print('connection successful, ready to proceed')
+    connection.close()
+except Exception as e:
+    print('connection failed: ',e)
