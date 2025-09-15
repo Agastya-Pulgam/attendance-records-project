@@ -2,7 +2,7 @@ import os
 import dotenv
 import mysql.connector as msc
 
-load_dotenv()
+dotenv.load_dotenv()
 
 db_user=os.getenv("DB_USER")
 db_pass=os.getenv("DB_PASS")
