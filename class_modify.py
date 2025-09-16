@@ -6,7 +6,7 @@ def add_class(standard,division,total_strength,class_teacher):
     try:
         connection=get_connection()
         cur=connection.cursor(buffered=True)
-        
+
         connection.start_transaction()
         cur.execute('insert into classes(standard,division,total_strength,class_teacher) values(%s,%s,%s,%s)',(standard,division,total_strength,class_teacher))
         connection.commit()
@@ -39,7 +39,9 @@ def remove_class(standard,division):
         cur.close()
         connection.close()
 
-        
+# BELOW GIVEN FUNCTION IS USE TO EDIT CLASS DETAILS, SUCH AS CLASS TEACHER,TOTAL STRENGTH, STANDARD AND DIVISION AN 
+# AN EXAMPLE CASE OF THIS IS WHEN A CLASS IS PROMOTED TO A HIGHER GRADE, INSTEAD OF CREATING A NEW CLASS FOR PRE-EXISTNG STUDENTS,
+# THE TEACHER CAN JUST EDIT THE CLASS STANDARD, SAVING TIME FROM FILLING OUT HE DETAILS OF THE CLASS AGAIN
 
-def modify_class(standard, division, total_strength,class_teacher):
+
 

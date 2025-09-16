@@ -9,10 +9,10 @@ db_user=os.getenv("DB_USER")
 db_pass=os.getenv("DB_PASS")
 db_name=os.getenv("DB_NAME")
 
-pool=pooling.get_MySQLConnectionPool(
+pool=pooling.MySQLConnectionPool(
     
-    poolname='mypool',
-    pool_size=50,
+    pool_name='mypool',
+    pool_size=32,
     host='localhost',
     user=db_user,
     passwd=db_pass,

@@ -58,6 +58,3 @@ def teacher_login(username,email,password):
     finally:
         cur.close()
         connection.close()
-
-
-teacher_login('teacher4','teacheremail4',123)
