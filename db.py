@@ -12,7 +12,7 @@ db_name=os.getenv("DB_NAME")
 pool=pooling.MySQLConnectionPool(
     
     pool_name='mypool',
-    pool_size=32,
+    pool_size=5,
     host='localhost',
     user=db_user,
     passwd=db_pass,
